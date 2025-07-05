@@ -1,22 +1,9 @@
 <mat-drawer-container>
   <mat-drawer mode="side" opened>
-    <button
-      matButton
-      (click)="changeMfeUrl('http://localhost:4201/', 'remote-app')"
-    >
-      Remote App
-    </button>
-    <button
-      matButton
-      (click)="changeMfeUrl('http://localhost:4202/', 'client-app')"
-    >
-      Client App
-    </button>
+    <button matButton (click)="changeMfeUrl('remote-app')">Remote App</button>
+    <button matButton (click)="changeMfeUrl('client-app')">Client App</button>
   </mat-drawer>
-  <mat-drawer-content
-    ><app-mfe-loader
-      [remoteUrl]="mfeUrl"
-      [elementName]="mfeElement"
-    ></app-mfe-loader
+  <mat-drawer-content>
+    <app-mfe-loader [mfeElement]="mfeElement"></app-mfe-loader
   ></mat-drawer-content>
 </mat-drawer-container>

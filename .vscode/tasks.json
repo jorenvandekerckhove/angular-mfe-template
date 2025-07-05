@@ -1,0 +1,86 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run web components",
+      "dependsOn": [
+        "npm: start - web-components/shell-app",
+        "npm: start - web-components/remote-app",
+        "npm: start - web-components/client-app"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "web-components/shell-app",
+      "problemMatcher": [],
+      "label": "npm: start - web-components/shell-app",
+      "detail": "ng serve",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "web-components/remote-app",
+      "problemMatcher": [],
+      "label": "npm: start - web-components/remote-app",
+      "detail": "ng serve",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "web-components/client-app",
+      "problemMatcher": [],
+      "label": "npm: start - web-components/client-app",
+      "detail": "ng serve",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "web-components/remote-app",
+      "problemMatcher": [],
+      "label": "npm: build - web-components/remote-app",
+      "detail": "ng build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "web-components/client-app",
+      "problemMatcher": [],
+      "label": "npm: build - web-components/client-app",
+      "detail": "ng build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "command": "http-server web-components/remote-app/dist/remote-app/browser -p 4201 --cors",
+      "label": "Deploy remote app built",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "command": "http-server web-components/client-app/dist/client-app/browser -p 4202 --cors",
+      "label": "Deploy client app built",
+      "problemMatcher": []
+    }
+  ]
+}
