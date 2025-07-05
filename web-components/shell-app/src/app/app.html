@@ -1,1 +1,22 @@
-<app-mfe-loader remoteUrl="http://localhost:4201/" elementName="remote-app"></app-mfe-loader>
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <button
+      matButton
+      (click)="changeMfeUrl('http://localhost:4201/', 'remote-app')"
+    >
+      Remote App
+    </button>
+    <button
+      matButton
+      (click)="changeMfeUrl('http://localhost:4202/', 'client-app')"
+    >
+      Client App
+    </button>
+  </mat-drawer>
+  <mat-drawer-content
+    ><app-mfe-loader
+      [remoteUrl]="mfeUrl"
+      [elementName]="mfeElement"
+    ></app-mfe-loader
+  ></mat-drawer-content>
+</mat-drawer-container>
