@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "shell-app": {
+    "client-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -16,18 +16,13 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {
-            "styles": [
-              "src/styles.scss",
-              "@angular/material/prebuilt-themes/azure-blue.css"
-            ]
-          },
+          "options": {},
           "configurations": {
             "production": {
-              "target": "shell-app:esbuild:production"
+              "target": "client-app:esbuild:production"
             },
             "development": {
-              "target": "shell-app:esbuild:development",
+              "target": "client-app:esbuild:development",
               "dev": true
             }
           },
@@ -36,7 +31,7 @@
         "serve": {
           "builder": "@angular-architects/native-federation:build",
           "options": {
-            "target": "shell-app:serve-original:development",
+            "target": "client-app:serve-original:development",
             "rebuildDelay": 0,
             "dev": true,
             "port": 0
@@ -57,10 +52,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss",
-              "@angular/material/prebuilt-themes/azure-blue.css"
-            ]
+            "styles": ["src/styles.scss"]
           }
         },
         "esbuild": {
@@ -76,10 +68,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss",
-              "@angular/material/prebuilt-themes/azure-blue.css"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -109,15 +98,15 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "shell-app:esbuild:production"
+              "buildTarget": "client-app:esbuild:production"
             },
             "development": {
-              "buildTarget": "shell-app:esbuild:development"
+              "buildTarget": "client-app:esbuild:development"
             }
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 4200
+            "port": 4203
           }
         }
       }

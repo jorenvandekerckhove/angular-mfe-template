@@ -1,0 +1,4 @@
+{
+  "remote-app": "http://localhost:4201/remoteEntry.json",
+  "client-app": "http://localhost:4203/remoteEntry.json"
+}
