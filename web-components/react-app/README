@@ -1,0 +1,5 @@
+# How to expose web component
+
+Run 'npm run build-watch' and 'npm run preview' or 'npm run serve' to expose the main.js file.<br/>
+This can then be used by the Angular application when you develop the React application.<br/>
+Everytime you change something, reload the Angular page to see the difference.

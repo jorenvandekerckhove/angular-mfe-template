@@ -14,9 +14,6 @@ import { MFE_COMPONENTS } from '../../data/mfe-components';
   standalone: true,
 })
 export class MfeLoaderComponent implements AfterViewInit {
-  oldMfeMainUrl: string | undefined;
-  oldMfePolyfillsUrl: string | undefined;
-
   _mfeElement: string = '';
   get mfeElement(): string {
     return this._mfeElement;
@@ -40,6 +37,15 @@ export class MfeLoaderComponent implements AfterViewInit {
     // }
   }
 
+  private async loadMfeComponent(elementName: string) {
+    const url = MFE_COMPONENTS.get(elementName)!;
+    await this.loadMfeScript(`${url}/main.js`);
+    const el = document.createElement(elementName);
+    const oldChild = this.mfeContainer?.nativeElement.firstChild;
+    if (oldChild) this.mfeContainer?.nativeElement.replaceChild(el, oldChild);
+    else this.mfeContainer?.nativeElement.appendChild(el);
+  }
+
   private loadMfeScript(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if (document.querySelector(`script[src="${url}"]`)) return resolve();
@@ -51,15 +57,6 @@ export class MfeLoaderComponent implements AfterViewInit {
       script.onerror = () => reject(new Error(`Script load error: ${url}`));
       document.head.appendChild(script);
     });
-  }
-
-  private async loadMfeComponent(elementName: string) {
-    const url = MFE_COMPONENTS.get(elementName)!;
-    await this.loadMfeScript(`${url}/main.js`);
-    const el = document.createElement(elementName);
-    const oldChild = this.mfeContainer?.nativeElement.firstChild;
-    if (oldChild) this.mfeContainer?.nativeElement.replaceChild(el, oldChild);
-    else this.mfeContainer?.nativeElement.appendChild(el);
   }
 
   delay(ms: number) {

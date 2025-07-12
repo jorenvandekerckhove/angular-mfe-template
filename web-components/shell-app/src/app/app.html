@@ -1,7 +1,10 @@
 <mat-drawer-container>
   <mat-drawer mode="side" opened>
-    <button matButton (click)="changeMfeUrl('remote-app')">Remote App</button>
-    <button matButton (click)="changeMfeUrl('client-app')">Client App</button>
+    <div class="column">
+      <button matButton (click)="changeMfeUrl('remote-app')">Remote App</button>
+      <button matButton (click)="changeMfeUrl('client-app')">Client App</button>
+      <button matButton (click)="changeMfeUrl('react-app')">React App</button>
+    </div>
   </mat-drawer>
   <mat-drawer-content>
     <app-mfe-loader [mfeElement]="mfeElement"></app-mfe-loader
