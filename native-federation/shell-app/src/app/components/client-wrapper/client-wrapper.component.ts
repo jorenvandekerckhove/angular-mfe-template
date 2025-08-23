@@ -1,11 +1,27 @@
-import { loadRemoteModule } from '@angular-architects/native-federation';
+import { loadRemote as loadModuleRemote } from '@module-federation/enhanced/runtime';
+import { loadRemoteModule as loadNativeRemote } from '@angular-architects/native-federation';
 import {
   AfterViewInit,
   Component,
+  Input,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import mf from './remote-loader';
+
+export interface WrapperConfig {
+  remoteName: string;
+  exposedModule: string;
+  elementName: string;
+  kind: 'module' | 'native';
+}
+
+export const initWrapperConfig: WrapperConfig = {
+  remoteName: '',
+  exposedModule: '',
+  elementName: '',
+  kind: 'native',
+};
 
 @Component({
   selector: 'app-client-wrapper',
@@ -13,6 +29,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class ClientWrapperComponent implements AfterViewInit {
   protected title = 'shell-app';
+
+  // Don't forget to call withComponentInputBinding()
+  // in your app.config.ts
+  @Input() config = initWrapperConfig;
 
   @ViewChild('mfeContainer', { read: ViewContainerRef })
   mfeContainer!: ViewContainerRef;
@@ -22,10 +42,22 @@ export class ClientWrapperComponent implements AfterViewInit {
   }
 
   async load(): Promise<void> {
-    const component = await loadRemoteModule('client-app', './Component').then(
-      (m) => m.ClientApp
-    );
+    const { exposedModule, remoteName, elementName, kind } = this.config;
+    let component;
+    if (kind === 'native') {
+      component = await loadNativeRemote(remoteName, exposedModule).then(
+        (m) => m.ClientApp
+      );
+      this.mfeContainer.createComponent(component);
+    } else {
+      const path = [remoteName, exposedModule].join('/');
+      await mf.loadRemote(path);
+      const root = document.createElement(elementName);
+      this.mfeContainer.element.nativeElement.appendChild(root);
+    }
 
-    this.mfeContainer.createComponent(component);
+    // const component = await loadRemoteModule('client-app', './Component').then(
+    //   (m) => m.ClientApp
+    // );
   }
 }
