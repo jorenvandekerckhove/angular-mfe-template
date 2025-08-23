@@ -2,6 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Run native federation applications",
+      "dependsOn": [
+        "npm: start - native-federation/shell-app",
+        "npm: start - native-federation/remote-app",
+        "npm: start - native-federation/client-app"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "Run web components",
       "dependsOn": [
         "npm: start - web-components/shell-app",
@@ -9,6 +18,42 @@
         "npm: start - web-components/client-app"
       ],
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "native-federation/shell-app",
+      "problemMatcher": [],
+      "label": "npm: start - native-federation/shell-app",
+      "detail": "ng serve",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "native-federation/client-app",
+      "problemMatcher": [],
+      "label": "npm: start - native-federation/client-app",
+      "detail": "ng serve",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "native-federation/remote-app",
+      "problemMatcher": [],
+      "label": "npm: start - native-federation/remote-app",
+      "detail": "ng serve",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     },
     {
       "type": "npm",
