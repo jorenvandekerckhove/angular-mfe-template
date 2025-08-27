@@ -117,15 +117,15 @@
     },
     {
       "type": "shell",
-      "command": "http-server web-components/remote-app/dist/remote-app/browser -p 4201 --cors",
-      "label": "Deploy remote app built",
+      "command": "http-server web-components/client-app/dist/client-app/browser -p 5557 --cors",
+      "label": "Deploy client app built",
       "problemMatcher": []
     },
     {
       "type": "shell",
-      "command": "http-server web-components/client-app/dist/client-app/browser -p 4202 --cors",
-      "label": "Deploy client app built",
+      "command": "http-server web-components/remote-app/dist/remote-app/browser -p 5558 --cors",
+      "label": "Deploy remote app built",
       "problemMatcher": []
-    }
+    }    
   ]
 }

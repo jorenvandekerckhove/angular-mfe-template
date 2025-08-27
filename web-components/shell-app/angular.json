@@ -68,6 +68,9 @@
               "buildTarget": "shell-app:build:development"
             }
           },
+          "options": {
+            "port": 5556
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
